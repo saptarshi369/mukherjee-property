@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Division Statement</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6f9; color: #1e293b; }
+
+  .header { background: linear-gradient(135deg,#1e293b,#334155); color: #fff; padding: 20px 16px; text-align: center; }
+  .header h1 { font-size: 20px; font-weight: 700; }
+  .header p { font-size: 13px; opacity: 0.6; margin-top: 4px; }
+
+  .section { padding: 10px 12px; }
+  .section-label { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; padding-left: 4px; }
+
+  .gv-strip { display: flex; gap: 8px; flex-wrap: wrap; }
+  .gv-card { flex: 1 1 80px; background: #fff; border-radius: 10px; padding: 10px 14px; text-align: center; border: 1px solid #e5e7eb; }
+  .gv-card.total { background: linear-gradient(135deg,#fefce8,#fffbeb); border-color: #fde68a; }
+  .gv-label { font-size: 11px; font-weight: 600; color: #9ca3af; text-transform: uppercase; }
+  .gv-val { font-size: 22px; font-weight: 700; color: #1e293b; }
+  .gv-card.total .gv-label, .gv-card.total .gv-val { color: #92400e; }
+
+  .card { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .card-head { padding: 12px 16px; border-bottom: 1px solid #e5e7eb; }
+  .card-head h2 { font-size: 15px; font-weight: 700; display: inline; }
+  .card-head .hint { font-size: 11px; color: #9ca3af; margin-left: 8px; }
+
+  .p1-banner { padding: 8px 16px; background: #fff1f2; border-bottom: 1px solid #fecdd3; font-size: 12px; color: #be123c; }
+  .p1-banner strong { font-weight: 700; }
+
+  .scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #d1d5db; padding: 8px 10px; text-align: center; white-space: nowrap; }
+
+  /* Sticky first column */
+  th.sticky, td.sticky {
+    position: sticky; left: 0; z-index: 2; background: #fff;
+    text-align: left; font-weight: 600; font-size: 13px; min-width: 155px;
+    border-right: 2px solid #9ca3af;
+  }
+  th.sticky { z-index: 3; background: #f8fafc; font-size: 11px; color: #475569; }
+
+  /* Static table colors */
+  .grp-head { background: #f8fafc; font-weight: 700; font-size: 11px; color: #475569; letter-spacing: .5px; }
+  .grp-head.grand { background: #fefce8; color: #92400e; }
+  .sub-law { background: #f1f5f9; font-size: 10px; font-weight: 600; color: #475569; }
+  .sub-p1 { background: #fff1f2; font-size: 10px; font-weight: 600; color: #be123c; }
+
+  .frac { font-size: 10px; color: #9ca3af; }
+  .val-law { font-size: 14px; font-weight: 600; color: #475569; }
+  .cell-law { background: #fafafa; }
+  .cell-law.alt { background: #f5f5f5; }
+
+  .frac-p1 { font-size: 10px; color: #f9a8b8; }
+  .val-p1 { font-size: 14px; font-weight: 600; color: #be123c; }
+  .cell-p1 { background: #fff5f5; }
+  .cell-p1.alt { background: #fff1f2; }
+
+  .cell-gt-law { background: #fffbeb; }
+  .cell-gt-law.alt { background: #fef9c3; }
+  .val-gt { font-size: 15px; font-weight: 700; color: #78716c; }
+
+  .cell-gt-p1 { background: #fff5f5; }
+  .cell-gt-p1.alt { background: #fff1f2; }
+  .val-gt-p1 { font-size: 15px; font-weight: 700; color: #be123c; }
+
+  .alt-row td.sticky { background: #fafbfc; }
+
+  /* Divider */
+  .divider { padding: 10px 20px; }
+  .divider hr { border: none; border-top: 2px dashed #94a3b8; }
+
+  /* Dynamic table */
+  .dyn-head { padding: 12px 16px; background: #f8fffe; border-bottom: 1px solid #e0e7eb; }
+  .dyn-head h2 { font-size: 15px; font-weight: 700; color: #1e293b; }
+  .dyn-head p { font-size: 12px; color: #6b7280; margin-top: 2px; }
+
+  .dyn-grp { background: #fafbfc; font-weight: 700; font-size: 11px; color: #374151; letter-spacing: .5px; }
+  .dyn-sub-share { background: #f0fdf8; font-size: 10px; font-weight: 600; color: #059669; }
+  .dyn-sub-val { background: #f5f6f7; font-size: 10px; font-weight: 600; color: #374151; }
+
+  .share-cell { background: #f7fdf9; cursor: pointer; font-size: 15px; font-weight: 600; color: #059669; }
+  .share-cell.alt { background: #f0faf5; }
+  .share-cell span { border-bottom: 1px dashed #86efac; padding-bottom: 1px; }
+
+  .val-cell { background: #fafbfc; font-size: 14px; font-weight: 600; color: #1e293b; font-family: monospace; }
+  .val-cell.alt { background: #f5f6f7; }
+
+  .gt-cell { background: #fffbeb; font-size: 16px; font-weight: 700; color: #92400e; font-family: monospace; }
+  .gt-cell.alt { background: #fef9c3; }
+
+  .share-input {
+    width: 52px; font-size: 14px; font-weight: 600; color: #059669;
+    border: 2px solid #34d399; border-radius: 5px; text-align: center;
+    padding: 3px; background: #fff; outline: none;
+  }
+
+  /* Download */
+  .dl-section { padding: 16px 12px 28px; text-align: center; }
+  .dl-btn {
+    background: linear-gradient(135deg,#1e293b,#334155); color: #fff; border: none;
+    border-radius: 10px; padding: 13px 30px; font-size: 15px; font-weight: 600;
+    cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .dl-btn:hover { opacity: 0.9; }
+  .dl-hint { font-size: 11px; color: #9ca3af; margin-top: 6px; }
+
+  @media print {
+    body { background: #fff; }
+    .dl-section { display: none; }
+    .scroll-wrap { overflow: visible; }
+    table { font-size: 11px; }
+    th, td { padding: 4px 6px; }
+    .header { padding: 12px; }
+    .card { box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Property Division Statement</h1>
+  <p>Division among 6 legal heirs</p>
+</div>
+
+<!-- 1. GUIDANCE VALUES -->
+<div class="section">
+  <div class="section-label">Guidance Values (Assumed)</div>
+  <div class="gv-strip">
+    <div class="gv-card"><div class="gv-label">GT Road</div><div class="gv-val">₹1,000</div></div>
+    <div class="gv-card"><div class="gv-label">BK Street</div><div class="gv-val">₹500</div></div>
+    <div class="gv-card"><div class="gv-label">Others</div><div class="gv-val">₹100</div></div>
+    <div class="gv-card total"><div class="gv-label">Total</div><div class="gv-val">₹1,600</div></div>
+  </div>
+</div>
+
+<!-- 2. BY LAW & PROPOSAL 1 -->
+<div class="section">
+  <div class="card">
+    <div class="card-head">
+      <h2>By Law & Proposal 1</h2>
+      <span class="hint">Scroll →</span>
+    </div>
+    <div class="p1-banner">
+      <strong>ⓘ</strong> Proposal 1 is as proposed by <strong>Shubhabrata Mukherjee</strong>
+    </div>
+    <div class="scroll-wrap">
+      <table id="staticTable"></table>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider"><hr></div>
+
+<!-- 3. YOUR PROPOSAL -->
+<div class="section">
+  <div class="card">
+    <div class="dyn-head">
+      <h2>Generate Your Proposal</h2>
+      <p>Tap any <strong style="color:#059669">Share</strong> fraction to edit · Values update automatically</p>
+    </div>
+    <div class="scroll-wrap">
+      <table id="dynTable"></table>
+    </div>
+  </div>
+</div>
+
+<!-- 4. DOWNLOAD -->
+<div class="dl-section">
+  <button class="dl-btn" onclick="window.print()">⬇ Download as PDF</button>
+  <p class="dl-hint">Opens print dialog — save as PDF to share your proposal</p>
+</div>
+
+<script>
+const SH = [
+  "Late Namita Chatterjee","Late Swapan Mukherjee","Late Sumita Chakraborty",
+  "Shri Ropan Mukherjee","Late Samir Mukherjee","Late Tapan Mukherjee"
+];
+const PROPS = [
+  { k:"gt", label:"GT Road", gv:1000 },
+  { k:"bk", label:"BK Street", gv:500 },
+  { k:"ot", label:"Others", gv:100 }
+];
+const BL = {
+  gt:["1/7","1/7","1/7","2/7","1/7","1/7"],
+  bk:["1/7","1/7","1/7","2/7","1/7","1/7"],
+  ot:["1/7","1/7","1/7","2/7","1/7","1/7"]
+};
+const P1 = {
+  gt:["2/13","2/13","2/13","2/13","4/13","1/13"],
+  bk:["2/11","2/11","2/11","2/11","2/11","1/11"],
+  ot:["1/6","1/6","1/6","1/6","1/6","1/6"]
+};
+
+// P2 defaults to By Law
+const p2 = {
+  gt:[...BL.gt],
+  bk:[...BL.bk],
+  ot:[...BL.ot]
+};
+
+function pf(s) {
+  const parts = s.split("/").map(Number);
+  return (parts.length === 2 && parts[1] !== 0) ? parts[0] / parts[1] : 0;
+}
+function fmt(v) { return "₹" + v.toFixed(2); }
+function calcVal(data, pk, i) { return pf(data[pk][i]) * PROPS.find(p => p.k === pk).gv; }
+function calcGrand(data, i) { return PROPS.reduce((s, p) => s + pf(data[p.k][i]) * p.gv, 0); }
+
+// ─── STATIC TABLE ───
+function renderStatic() {
+  let h = '';
+  // Row 1: group headers
+  h += '<thead><tr>';
+  h += '<th class="sticky" rowspan="2" style="background:#f8fafc">Shareholder</th>';
+  PROPS.forEach(p => {
+    h += `<th colspan="2" class="grp-head">${p.label}<br><span style="font-weight:400;font-size:10px;color:#9ca3af">₹${p.gv}</span></th>`;
+  });
+  h += '<th colspan="2" class="grp-head grand">GRAND TOTAL</th>';
+  h += '</tr><tr>';
+  // Row 2: sub headers
+  PROPS.forEach(() => {
+    h += '<th class="sub-law">By Law</th><th class="sub-p1">Proposal 1</th>';
+  });
+  h += '<th class="sub-law">By Law</th><th class="sub-p1">Proposal 1</th>';
+  h += '</tr></thead>';
+
+  h += '<tbody>';
+  SH.forEach((name, idx) => {
+    const a = idx % 2 === 1 ? ' alt' : '';
+    h += '<tr>';
+    h += `<td class="sticky ${a ? 'alt-row' : ''}" style="${a ? 'background:#fafbfc' : ''}">${name}</td>`;
+    PROPS.forEach(prop => {
+      const blV = calcVal(BL, prop.k, idx);
+      const p1V = calcVal(P1, prop.k, idx);
+      h += `<td class="cell-law${a}"><div class="frac">${BL[prop.k][idx]}</div><div class="val-law">${fmt(blV)}</div></td>`;
+      h += `<td class="cell-p1${a}"><div class="frac-p1">${P1[prop.k][idx]}</div><div class="val-p1">${fmt(p1V)}</div></td>`;
+    });
+    const blGT = calcGrand(BL, idx);
+    const p1GT = calcGrand(P1, idx);
+    h += `<td class="cell-gt-law${a}"><div class="val-gt">${fmt(blGT)}</div></td>`;
+    h += `<td class="cell-gt-p1${a}"><div class="val-gt-p1">${fmt(p1GT)}</div></td>`;
+    h += '</tr>';
+  });
+  h += '</tbody>';
+  document.getElementById('staticTable').innerHTML = h;
+}
+
+// ─── DYNAMIC TABLE ───
+function renderDynamic() {
+  let h = '';
+  h += '<thead><tr>';
+  h += '<th class="sticky" rowspan="2" style="background:#fafbfc">Shareholder</th>';
+  PROPS.forEach(p => {
+    h += `<th colspan="2" class="dyn-grp">${p.label}<br><span style="font-weight:400;font-size:10px;color:#9ca3af">₹${p.gv}</span></th>`;
+  });
+  h += '<th rowspan="2" style="background:#fefce8;font-weight:700;font-size:11px;color:#92400e;letter-spacing:.5px">GRAND<br>TOTAL</th>';
+  h += '</tr><tr>';
+  PROPS.forEach(p => {
+    h += `<th class="dyn-sub-share">Share</th><th class="dyn-sub-val">Value</th>`;
+  });
+  h += '</tr></thead>';
+
+  h += '<tbody>';
+  SH.forEach((name, idx) => {
+    const a = idx % 2 === 1 ? ' alt' : '';
+    h += '<tr>';
+    h += `<td class="sticky" style="${a ? 'background:#fafbfc' : ''}">${name}</td>`;
+    PROPS.forEach(prop => {
+      const id = `${prop.k}-${idx}`;
+      const val = calcVal(p2, prop.k, idx);
+      h += `<td class="share-cell${a}" onclick="editCell('${prop.k}',${idx})" id="sc-${id}"><span>${p2[prop.k][idx]}</span></td>`;
+      h += `<td class="val-cell${a}" id="vc-${id}">${fmt(val)}</td>`;
+    });
+    const grand = calcGrand(p2, idx);
+    h += `<td class="gt-cell${a}" id="gt-${idx}">${fmt(grand)}</td>`;
+    h += '</tr>';
+  });
+  h += '</tbody>';
+  document.getElementById('dynTable').innerHTML = h;
+}
+
+let currentEdit = null;
+
+function editCell(pk, idx) {
+  // Close any open edit
+  if (currentEdit) commitEdit();
+
+  const id = `${pk}-${idx}`;
+  const cell = document.getElementById('sc-' + id);
+  const current = p2[pk][idx];
+  cell.innerHTML = `<input class="share-input" id="ei-${id}" value="${current}"
+    onblur="commitEdit()" onkeydown="if(event.key==='Enter')commitEdit()">`;
+  document.getElementById('ei-' + id).focus();
+  document.getElementById('ei-' + id).select();
+  currentEdit = { pk, idx, id };
+}
+
+function commitEdit() {
+  if (!currentEdit) return;
+  const { pk, idx, id } = currentEdit;
+  const input = document.getElementById('ei-' + id);
+  if (!input) { currentEdit = null; return; }
+
+  const val = input.value.trim();
+  const pts = val.split("/").map(Number);
+  if (pts.length === 2 && pts[1] > 0 && pts[0] >= 0) {
+    p2[pk][idx] = val;
+  }
+  currentEdit = null;
+
+  // Update this row
+  const cell = document.getElementById('sc-' + id);
+  cell.innerHTML = `<span>${p2[pk][idx]}</span>`;
+
+  // Update all values for this person
+  PROPS.forEach(prop => {
+    const vid = `${prop.k}-${idx}`;
+    document.getElementById('vc-' + vid).textContent = fmt(calcVal(p2, prop.k, idx));
+  });
+  document.getElementById('gt-' + idx).textContent = fmt(calcGrand(p2, idx));
+}
+
+// Init
+renderStatic();
+renderDynamic();
+</script>
+</body>
+</html>
