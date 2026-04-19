@@ -6,116 +6,118 @@
 <title>Property Division Statement</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6f9; color: #1e293b; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6f9; color: #1e293b; font-size: 16px; }
 
-  .header { background: linear-gradient(135deg,#1e293b,#334155); color: #fff; padding: 20px 16px; text-align: center; }
-  .header h1 { font-size: 20px; font-weight: 700; }
-  .header p { font-size: 13px; opacity: 0.6; margin-top: 4px; }
+  .header { background: linear-gradient(135deg,#1e293b,#334155); color: #fff; padding: 24px 16px; text-align: center; }
+  .header h1 { font-size: 24px; font-weight: 700; }
+  .header p { font-size: 15px; opacity: 0.6; margin-top: 6px; }
 
-  .section { padding: 10px 12px; }
-  .section-label { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; padding-left: 4px; }
+  .section { padding: 12px 12px; }
+  .section-label { font-size: 13px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-left: 4px; }
 
-  .gv-strip { display: flex; gap: 8px; flex-wrap: wrap; }
-  .gv-card { flex: 1 1 80px; background: #fff; border-radius: 10px; padding: 10px 14px; text-align: center; border: 1px solid #e5e7eb; }
+  .gv-strip { display: flex; gap: 10px; flex-wrap: wrap; }
+  .gv-card { flex: 1 1 90px; background: #fff; border-radius: 12px; padding: 12px 16px; text-align: center; border: 1px solid #e5e7eb; }
   .gv-card.total { background: linear-gradient(135deg,#fefce8,#fffbeb); border-color: #fde68a; }
-  .gv-label { font-size: 11px; font-weight: 600; color: #9ca3af; text-transform: uppercase; }
-  .gv-val { font-size: 22px; font-weight: 700; color: #1e293b; }
+  .gv-label { font-size: 13px; font-weight: 600; color: #9ca3af; text-transform: uppercase; }
+  .gv-val { font-size: 26px; font-weight: 700; color: #1e293b; margin-top: 2px; }
   .gv-card.total .gv-label, .gv-card.total .gv-val { color: #92400e; }
 
   .card { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-  .card-head { padding: 12px 16px; border-bottom: 1px solid #e5e7eb; }
-  .card-head h2 { font-size: 15px; font-weight: 700; display: inline; }
-  .card-head .hint { font-size: 11px; color: #9ca3af; margin-left: 8px; }
+  .card-head { padding: 14px 18px; border-bottom: 1px solid #e5e7eb; }
+  .card-head h2 { font-size: 18px; font-weight: 700; display: inline; }
+  .card-head .hint { font-size: 13px; color: #9ca3af; margin-left: 10px; }
 
-  .p1-banner { padding: 8px 16px; background: #fff1f2; border-bottom: 1px solid #fecdd3; font-size: 12px; color: #be123c; }
+  .p1-banner { padding: 10px 18px; background: #fff1f2; border-bottom: 1px solid #fecdd3; font-size: 14px; color: #be123c; }
   .p1-banner strong { font-weight: 700; }
 
   .scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
   table { border-collapse: collapse; width: 100%; }
-  th, td { border: 1px solid #d1d5db; padding: 8px 10px; text-align: center; white-space: nowrap; }
+  th, td { border: 1px solid #cbd5e1; padding: 10px 12px; text-align: center; white-space: nowrap; }
 
   /* Sticky first column */
   th.sticky, td.sticky {
     position: sticky; left: 0; z-index: 2; background: #fff;
-    text-align: left; font-weight: 600; font-size: 13px; min-width: 155px;
-    border-right: 2px solid #9ca3af;
+    text-align: left; font-weight: 600; font-size: 15px; min-width: 170px;
+    border-right: 2px solid #94a3b8;
   }
-  th.sticky { z-index: 3; background: #f8fafc; font-size: 11px; color: #475569; }
+  th.sticky { z-index: 3; background: #f8fafc; font-size: 13px; color: #475569; }
 
-  /* Static table colors */
-  .grp-head { background: #f8fafc; font-weight: 700; font-size: 11px; color: #475569; letter-spacing: .5px; }
+  /* Static table */
+  .grp-head { background: #f8fafc; font-weight: 700; font-size: 14px; color: #475569; letter-spacing: .5px; }
   .grp-head.grand { background: #fefce8; color: #92400e; }
-  .sub-law { background: #f1f5f9; font-size: 10px; font-weight: 600; color: #475569; }
-  .sub-p1 { background: #fff1f2; font-size: 10px; font-weight: 600; color: #be123c; }
+  .sub-law { background: #f1f5f9; font-size: 13px; font-weight: 600; color: #475569; }
+  .sub-p1 { background: #fff1f2; font-size: 13px; font-weight: 600; color: #be123c; }
 
-  .frac { font-size: 10px; color: #9ca3af; }
-  .val-law { font-size: 14px; font-weight: 600; color: #475569; }
+  .frac { font-size: 12px; color: #9ca3af; margin-bottom: 2px; }
+  .val-law { font-size: 17px; font-weight: 600; color: #475569; }
   .cell-law { background: #fafafa; }
   .cell-law.alt { background: #f5f5f5; }
 
-  .frac-p1 { font-size: 10px; color: #f9a8b8; }
-  .val-p1 { font-size: 14px; font-weight: 600; color: #be123c; }
+  .frac-p1 { font-size: 12px; color: #f9a8b8; margin-bottom: 2px; }
+  .val-p1 { font-size: 17px; font-weight: 600; color: #be123c; }
   .cell-p1 { background: #fff5f5; }
   .cell-p1.alt { background: #fff1f2; }
 
   .cell-gt-law { background: #fffbeb; }
   .cell-gt-law.alt { background: #fef9c3; }
-  .val-gt { font-size: 15px; font-weight: 700; color: #78716c; }
+  .val-gt { font-size: 18px; font-weight: 700; color: #78716c; }
 
   .cell-gt-p1 { background: #fff5f5; }
   .cell-gt-p1.alt { background: #fff1f2; }
-  .val-gt-p1 { font-size: 15px; font-weight: 700; color: #be123c; }
+  .val-gt-p1 { font-size: 18px; font-weight: 700; color: #be123c; }
 
   .alt-row td.sticky { background: #fafbfc; }
 
   /* Divider */
-  .divider { padding: 10px 20px; }
+  .divider { padding: 12px 20px; }
   .divider hr { border: none; border-top: 2px dashed #94a3b8; }
 
   /* Dynamic table */
-  .dyn-head { padding: 12px 16px; background: #f8fffe; border-bottom: 1px solid #e0e7eb; }
-  .dyn-head h2 { font-size: 15px; font-weight: 700; color: #1e293b; }
-  .dyn-head p { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .dyn-head { padding: 14px 18px; background: #f8fffe; border-bottom: 1px solid #e0e7eb; }
+  .dyn-head h2 { font-size: 18px; font-weight: 700; color: #1e293b; }
+  .dyn-head p { font-size: 14px; color: #6b7280; margin-top: 4px; }
 
-  .dyn-grp { background: #fafbfc; font-weight: 700; font-size: 11px; color: #374151; letter-spacing: .5px; }
-  .dyn-sub-share { background: #f0fdf8; font-size: 10px; font-weight: 600; color: #059669; }
-  .dyn-sub-val { background: #f5f6f7; font-size: 10px; font-weight: 600; color: #374151; }
+  .dyn-grp { background: #fafbfc; font-weight: 700; font-size: 14px; color: #374151; letter-spacing: .5px; }
+  .dyn-sub-share { background: #f0fdf8; font-size: 13px; font-weight: 600; color: #059669; }
+  .dyn-sub-val { background: #f5f6f7; font-size: 13px; font-weight: 600; color: #374151; }
+  .dyn-grp-gt { background: #fefce8; font-weight: 700; font-size: 14px; color: #92400e; letter-spacing: .5px; }
 
-  .share-cell { background: #f7fdf9; cursor: pointer; font-size: 15px; font-weight: 600; color: #059669; }
+  .share-cell { background: #f7fdf9; cursor: pointer; font-size: 18px; font-weight: 600; color: #059669; }
   .share-cell.alt { background: #f0faf5; }
   .share-cell span { border-bottom: 1px dashed #86efac; padding-bottom: 1px; }
 
-  .val-cell { background: #fafbfc; font-size: 14px; font-weight: 600; color: #1e293b; font-family: monospace; }
+  .val-cell { background: #fafbfc; font-size: 17px; font-weight: 600; color: #1e293b; font-family: 'Segoe UI', monospace; }
   .val-cell.alt { background: #f5f6f7; }
 
-  .gt-cell { background: #fffbeb; font-size: 16px; font-weight: 700; color: #92400e; font-family: monospace; }
+  .gt-cell { background: #fffbeb; font-size: 19px; font-weight: 700; color: #92400e; font-family: 'Segoe UI', monospace; }
   .gt-cell.alt { background: #fef9c3; }
 
   .share-input {
-    width: 52px; font-size: 14px; font-weight: 600; color: #059669;
-    border: 2px solid #34d399; border-radius: 5px; text-align: center;
-    padding: 3px; background: #fff; outline: none;
+    width: 60px; font-size: 17px; font-weight: 600; color: #059669;
+    border: 2px solid #34d399; border-radius: 6px; text-align: center;
+    padding: 4px; background: #fff; outline: none;
   }
 
   /* Download */
-  .dl-section { padding: 16px 12px 28px; text-align: center; }
+  .dl-section { padding: 20px 12px 32px; text-align: center; }
   .dl-btn {
     background: linear-gradient(135deg,#1e293b,#334155); color: #fff; border: none;
-    border-radius: 10px; padding: 13px 30px; font-size: 15px; font-weight: 600;
+    border-radius: 12px; padding: 14px 34px; font-size: 17px; font-weight: 600;
     cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   }
   .dl-btn:hover { opacity: 0.9; }
-  .dl-hint { font-size: 11px; color: #9ca3af; margin-top: 6px; }
+  .dl-hint { font-size: 13px; color: #9ca3af; margin-top: 8px; }
 
   @media print {
-    body { background: #fff; }
+    body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .dl-section { display: none; }
     .scroll-wrap { overflow: visible; }
-    table { font-size: 11px; }
-    th, td { padding: 4px 6px; }
-    .header { padding: 12px; }
-    .card { box-shadow: none; border: 1px solid #ccc; }
+    table { font-size: 12px; }
+    th, td { padding: 5px 7px; }
+    .header { padding: 14px; }
+    .card { box-shadow: none; border: 1px solid #bbb; page-break-inside: avoid; }
+    .divider { padding: 6px 20px; }
   }
 </style>
 </head>
@@ -196,7 +198,7 @@ const P1 = {
   ot:["1/6","1/6","1/6","1/6","1/6","1/6"]
 };
 
-// P2 defaults to By Law
+// Proposal 2 defaults to By Law fractions
 const p2 = {
   gt:[...BL.gt],
   bk:[...BL.bk],
@@ -207,22 +209,20 @@ function pf(s) {
   const parts = s.split("/").map(Number);
   return (parts.length === 2 && parts[1] !== 0) ? parts[0] / parts[1] : 0;
 }
-function fmt(v) { return "₹" + v.toFixed(2); }
+function fmt(v) { return "\u20B9" + v.toFixed(2); }
 function calcVal(data, pk, i) { return pf(data[pk][i]) * PROPS.find(p => p.k === pk).gv; }
 function calcGrand(data, i) { return PROPS.reduce((s, p) => s + pf(data[p.k][i]) * p.gv, 0); }
 
 // ─── STATIC TABLE ───
 function renderStatic() {
   let h = '';
-  // Row 1: group headers
   h += '<thead><tr>';
   h += '<th class="sticky" rowspan="2" style="background:#f8fafc">Shareholder</th>';
   PROPS.forEach(p => {
-    h += `<th colspan="2" class="grp-head">${p.label}<br><span style="font-weight:400;font-size:10px;color:#9ca3af">₹${p.gv}</span></th>`;
+    h += '<th colspan="2" class="grp-head">' + p.label + '<br><span style="font-weight:400;font-size:12px;color:#9ca3af">\u20B9' + p.gv + '</span></th>';
   });
   h += '<th colspan="2" class="grp-head grand">GRAND TOTAL</th>';
   h += '</tr><tr>';
-  // Row 2: sub headers
   PROPS.forEach(() => {
     h += '<th class="sub-law">By Law</th><th class="sub-p1">Proposal 1</th>';
   });
@@ -233,17 +233,17 @@ function renderStatic() {
   SH.forEach((name, idx) => {
     const a = idx % 2 === 1 ? ' alt' : '';
     h += '<tr>';
-    h += `<td class="sticky ${a ? 'alt-row' : ''}" style="${a ? 'background:#fafbfc' : ''}">${name}</td>`;
+    h += '<td class="sticky' + (a ? ' alt-row' : '') + '" style="' + (a ? 'background:#fafbfc' : '') + '">' + name + '</td>';
     PROPS.forEach(prop => {
       const blV = calcVal(BL, prop.k, idx);
       const p1V = calcVal(P1, prop.k, idx);
-      h += `<td class="cell-law${a}"><div class="frac">${BL[prop.k][idx]}</div><div class="val-law">${fmt(blV)}</div></td>`;
-      h += `<td class="cell-p1${a}"><div class="frac-p1">${P1[prop.k][idx]}</div><div class="val-p1">${fmt(p1V)}</div></td>`;
+      h += '<td class="cell-law' + a + '"><div class="frac">' + BL[prop.k][idx] + '</div><div class="val-law">' + fmt(blV) + '</div></td>';
+      h += '<td class="cell-p1' + a + '"><div class="frac-p1">' + P1[prop.k][idx] + '</div><div class="val-p1">' + fmt(p1V) + '</div></td>';
     });
     const blGT = calcGrand(BL, idx);
     const p1GT = calcGrand(P1, idx);
-    h += `<td class="cell-gt-law${a}"><div class="val-gt">${fmt(blGT)}</div></td>`;
-    h += `<td class="cell-gt-p1${a}"><div class="val-gt-p1">${fmt(p1GT)}</div></td>`;
+    h += '<td class="cell-gt-law' + a + '"><div class="val-gt">' + fmt(blGT) + '</div></td>';
+    h += '<td class="cell-gt-p1' + a + '"><div class="val-gt-p1">' + fmt(p1GT) + '</div></td>';
     h += '</tr>';
   });
   h += '</tbody>';
@@ -256,12 +256,12 @@ function renderDynamic() {
   h += '<thead><tr>';
   h += '<th class="sticky" rowspan="2" style="background:#fafbfc">Shareholder</th>';
   PROPS.forEach(p => {
-    h += `<th colspan="2" class="dyn-grp">${p.label}<br><span style="font-weight:400;font-size:10px;color:#9ca3af">₹${p.gv}</span></th>`;
+    h += '<th colspan="2" class="dyn-grp">' + p.label + '<br><span style="font-weight:400;font-size:12px;color:#9ca3af">\u20B9' + p.gv + '</span></th>';
   });
-  h += '<th rowspan="2" style="background:#fefce8;font-weight:700;font-size:11px;color:#92400e;letter-spacing:.5px">GRAND<br>TOTAL</th>';
+  h += '<th rowspan="2" class="dyn-grp-gt">GRAND<br>TOTAL</th>';
   h += '</tr><tr>';
-  PROPS.forEach(p => {
-    h += `<th class="dyn-sub-share">Share</th><th class="dyn-sub-val">Value</th>`;
+  PROPS.forEach(() => {
+    h += '<th class="dyn-sub-share">Share</th><th class="dyn-sub-val">Value</th>';
   });
   h += '</tr></thead>';
 
@@ -269,15 +269,15 @@ function renderDynamic() {
   SH.forEach((name, idx) => {
     const a = idx % 2 === 1 ? ' alt' : '';
     h += '<tr>';
-    h += `<td class="sticky" style="${a ? 'background:#fafbfc' : ''}">${name}</td>`;
+    h += '<td class="sticky" style="' + (a ? 'background:#fafbfc' : '') + '">' + name + '</td>';
     PROPS.forEach(prop => {
-      const id = `${prop.k}-${idx}`;
+      const id = prop.k + '-' + idx;
       const val = calcVal(p2, prop.k, idx);
-      h += `<td class="share-cell${a}" onclick="editCell('${prop.k}',${idx})" id="sc-${id}"><span>${p2[prop.k][idx]}</span></td>`;
-      h += `<td class="val-cell${a}" id="vc-${id}">${fmt(val)}</td>`;
+      h += '<td class="share-cell' + a + '" onclick="editCell(\'' + prop.k + '\',' + idx + ')" id="sc-' + id + '"><span>' + p2[prop.k][idx] + '</span></td>';
+      h += '<td class="val-cell' + a + '" id="vc-' + id + '">' + fmt(val) + '</td>';
     });
     const grand = calcGrand(p2, idx);
-    h += `<td class="gt-cell${a}" id="gt-${idx}">${fmt(grand)}</td>`;
+    h += '<td class="gt-cell' + a + '" id="gt-' + idx + '">' + fmt(grand) + '</td>';
     h += '</tr>';
   });
   h += '</tbody>';
@@ -287,45 +287,44 @@ function renderDynamic() {
 let currentEdit = null;
 
 function editCell(pk, idx) {
-  // Close any open edit
   if (currentEdit) commitEdit();
-
-  const id = `${pk}-${idx}`;
+  const id = pk + '-' + idx;
   const cell = document.getElementById('sc-' + id);
   const current = p2[pk][idx];
-  cell.innerHTML = `<input class="share-input" id="ei-${id}" value="${current}"
-    onblur="commitEdit()" onkeydown="if(event.key==='Enter')commitEdit()">`;
-  document.getElementById('ei-' + id).focus();
-  document.getElementById('ei-' + id).select();
-  currentEdit = { pk, idx, id };
+  cell.innerHTML = '<input class="share-input" id="ei-' + id + '" value="' + current + '" onblur="commitEdit()" onkeydown="if(event.key===\'Enter\')commitEdit()">';
+  var inp = document.getElementById('ei-' + id);
+  inp.focus();
+  inp.select();
+  currentEdit = { pk: pk, idx: idx, id: id };
 }
 
 function commitEdit() {
   if (!currentEdit) return;
-  const { pk, idx, id } = currentEdit;
-  const input = document.getElementById('ei-' + id);
+  var pk = currentEdit.pk;
+  var idx = currentEdit.idx;
+  var id = currentEdit.id;
+  var input = document.getElementById('ei-' + id);
   if (!input) { currentEdit = null; return; }
 
-  const val = input.value.trim();
-  const pts = val.split("/").map(Number);
+  var val = input.value.trim();
+  var pts = val.split("/").map(Number);
   if (pts.length === 2 && pts[1] > 0 && pts[0] >= 0) {
     p2[pk][idx] = val;
   }
   currentEdit = null;
 
-  // Update this row
-  const cell = document.getElementById('sc-' + id);
-  cell.innerHTML = `<span>${p2[pk][idx]}</span>`;
+  // Update share display
+  var cell = document.getElementById('sc-' + id);
+  cell.innerHTML = '<span>' + p2[pk][idx] + '</span>';
 
   // Update all values for this person
-  PROPS.forEach(prop => {
-    const vid = `${prop.k}-${idx}`;
+  PROPS.forEach(function(prop) {
+    var vid = prop.k + '-' + idx;
     document.getElementById('vc-' + vid).textContent = fmt(calcVal(p2, prop.k, idx));
   });
   document.getElementById('gt-' + idx).textContent = fmt(calcGrand(p2, idx));
 }
 
-// Init
 renderStatic();
 renderDynamic();
 </script>
