@@ -109,15 +109,39 @@
   .dl-btn:hover { opacity: 0.9; }
   .dl-hint { font-size: 13px; color: #9ca3af; margin-top: 8px; }
 
+  @page { size: landscape; margin: 10mm; }
   @media print {
-    body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 11px; }
     .dl-section { display: none; }
     .scroll-wrap { overflow: visible; }
-    table { font-size: 12px; }
-    th, td { padding: 5px 7px; }
-    .header { padding: 14px; }
+    table { font-size: 11px; }
+    th, td { padding: 3px 5px; }
+    th.sticky, td.sticky { min-width: 120px; font-size: 11px; padding: 4px 6px; }
+    .header { padding: 10px; }
+    .header h1 { font-size: 18px; }
+    .header p { font-size: 11px; }
     .card { box-shadow: none; border: 1px solid #bbb; page-break-inside: avoid; }
-    .divider { padding: 6px 20px; }
+    .card-head { padding: 8px 12px; }
+    .card-head h2 { font-size: 14px; }
+    .p1-banner { padding: 5px 12px; font-size: 10px; }
+    .divider { padding: 4px 20px; }
+    .section { padding: 6px 8px; }
+    .section-label { font-size: 10px; margin-bottom: 5px; }
+    .gv-card { padding: 6px 8px; }
+    .gv-label { font-size: 9px; }
+    .gv-val { font-size: 16px; }
+    .gv-strip { gap: 5px; }
+    .grp-head, .dyn-grp, .dyn-grp-gt { font-size: 11px; }
+    .sub-law, .sub-p1, .dyn-sub-share, .dyn-sub-val { font-size: 10px; }
+    .frac, .frac-p1 { font-size: 9px; }
+    .val-law, .val-p1 { font-size: 12px; }
+    .val-gt, .val-gt-p1 { font-size: 13px; }
+    .share-cell { font-size: 12px; }
+    .val-cell { font-size: 12px; }
+    .gt-cell { font-size: 13px; }
+    .dyn-head { padding: 8px 12px; }
+    .dyn-head h2 { font-size: 14px; }
+    .dyn-head p { font-size: 10px; }
   }
 </style>
 </head>
